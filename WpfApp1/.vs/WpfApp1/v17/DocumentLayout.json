@@ -1,22 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\",
+  "WorkspaceRootPath": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|c:\\users\\ameli\\onedrive\\pulpit\\projekt\\wpfapp1\\wpfapp1\\window1.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\window1.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|c:\\users\\ameli\\onedrive\\pulpit\\projekt\\wpfapp1\\wpfapp1\\window1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|d:\\github\\projekt1_p4\\wpfapp1\\wpfapp1\\window1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\window1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|c:\\users\\ameli\\onedrive\\pulpit\\projekt\\wpfapp1\\wpfapp1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|d:\\github\\projekt1_p4\\wpfapp1\\wpfapp1\\window3.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\window3.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|c:\\users\\ameli\\onedrive\\pulpit\\projekt\\wpfapp1\\wpfapp1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|d:\\github\\projekt1_p4\\wpfapp1\\wpfapp1\\window2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\window2.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|d:\\github\\projekt1_p4\\wpfapp1\\wpfapp1\\window1.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\window1.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|d:\\github\\projekt1_p4\\wpfapp1\\wpfapp1\\window2.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E1C9479-EE4F-4353-88D6-0D9F28C0C5B9}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\window2.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,56 +30,68 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Window1.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\Window1.xaml.cs",
-              "RelativeDocumentMoniker": "WpfApp1\\Window1.xaml.cs",
-              "ToolTip": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\Window1.xaml.cs",
-              "RelativeToolTip": "WpfApp1\\Window1.xaml.cs",
-              "ViewState": "AQIAAFoAAAAAAAAAAAAAAC8AAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-15T18:20:05.547Z",
+              "DocumentIndex": 1,
+              "Title": "Window3.xaml",
+              "DocumentMoniker": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window3.xaml",
+              "RelativeDocumentMoniker": "WpfApp1\\Window3.xaml",
+              "ToolTip": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window3.xaml",
+              "RelativeToolTip": "WpfApp1\\Window3.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-16T15:01:06.064Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Window1.xaml",
-              "DocumentMoniker": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\Window1.xaml",
+              "DocumentMoniker": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window1.xaml",
               "RelativeDocumentMoniker": "WpfApp1\\Window1.xaml",
-              "ToolTip": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\Window1.xaml",
+              "ToolTip": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window1.xaml",
               "RelativeToolTip": "WpfApp1\\Window1.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-15T17:59:17.388Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "WpfApp1\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\MainWindow.xaml",
-              "RelativeToolTip": "WpfApp1\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-15T17:18:36.086Z",
+              "WhenOpened": "2024-04-16T14:37:50.068Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "WpfApp1\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Ameli\\OneDrive\\Pulpit\\projekt\\WpfApp1\\WpfApp1\\MainWindow.xaml.cs",
-              "RelativeToolTip": "WpfApp1\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABsAAAA5AAAA",
+              "Title": "Window2.xaml",
+              "DocumentMoniker": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window2.xaml",
+              "RelativeDocumentMoniker": "WpfApp1\\Window2.xaml",
+              "ToolTip": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window2.xaml",
+              "RelativeToolTip": "WpfApp1\\Window2.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-16T12:12:05.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Window2.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window2.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Window2.xaml.cs",
+              "ToolTip": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window2.xaml.cs",
+              "RelativeToolTip": "WpfApp1\\Window2.xaml.cs",
+              "ViewState": "AQIAAHYAAAAAAAAAAAAwwHEAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-15T17:18:34.688Z",
+              "WhenOpened": "2024-04-16T12:35:45.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Window1.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window1.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Window1.xaml.cs",
+              "ToolTip": "D:\\GitHub\\Projekt1_P4\\WpfApp1\\WpfApp1\\Window1.xaml.cs",
+              "RelativeToolTip": "WpfApp1\\Window1.xaml.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAADAAAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-16T12:40:14.675Z",
               "EditorCaption": ""
             }
           ]

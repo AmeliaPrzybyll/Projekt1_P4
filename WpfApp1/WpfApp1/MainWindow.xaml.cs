@@ -34,7 +34,8 @@ namespace WpfApp1
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Window2 usun = new Window2();  
+            usun.Show();
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
