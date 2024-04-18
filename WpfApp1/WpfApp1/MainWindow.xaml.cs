@@ -40,7 +40,26 @@ namespace WpfApp1
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
+            Window3 stworz=new Window3();
+            stworz.Show();
+        }
 
+        //przesuwanie okienka 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton== MouseButtonState.Pressed)
+                DragMove();
+            
+        }
+
+        private void Zmniejszanie_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Zamykanie_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
