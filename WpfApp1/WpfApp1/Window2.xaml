@@ -6,43 +6,230 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         
-        Title="Window2"  Height="450" Width="630">
-    <Grid Background="Beige">
+        Title="Window2"
+        Width="600"
+        Height="550"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseDown="Window_MouseDown"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+    <Border CornerRadius="50">
+        <Border
+            BorderThickness="2"
+            CornerRadius="50"
+            Opacity="0.95">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#462AD8" />
+                    <GradientStop Offset="0.75" Color="#DA34AE" />
+                    <GradientStop Offset="1" Color="#8A16C1" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,8">
+                    <GradientStop Offset="0" Color="#060531" />
+                    <GradientStop Offset="0.75" Color="#1B1448" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                    <!-- Drugi wiersz, który będzie zajmował pozostałą przestrzeń -->
+                </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="390" Orientation="Horizontal">
-            <Label Width="150" HorizontalAlignment="Center" Foreground="White" Background="Chocolate">
-                Nazwa Produktu
-                
-            </Label>
-            <Label Width="150" HorizontalAlignment="Center" Foreground="White" Background="Chocolate">
-                Producent
-            </Label>
-            <Label Width="90" HorizontalAlignment="Center" Foreground="White" Background="Chocolate">
-                Cena
-            </Label>
-        </StackPanel>
-        <StackPanel  Width="400" Height="450" HorizontalAlignment="Left"  Orientation="Horizontal" Grid.ColumnSpan="3">
-            <ListBox x:Name="Wyswietlanie_nazwy" Height="380" Width="150"/>
-            <ListBox x:Name="Wyswietlanie_producenta" Height="380" Width="150"/>
-            <ListBox x:Name="Wyswietlanie_ceny" Height="380" Width="90"/>
-        </StackPanel>
-        <StackPanel Height="450" Width="200" HorizontalAlignment="Right">
-            <Label HorizontalAlignment="Center"
-                   FontWeight="Bold">
-                USUWANIE PRODUKTÓW
-            </Label>
-            <Label HorizontalAlignment="Center">
-                Podaj nazwę i producenta produktu:
-            </Label>
-            <TextBox x:Name="Nazwa_Produktu_usuwanie">Nazwa Produktu
-            </TextBox>
-            <TextBox x:Name="Producent_produktu_usuwanie">
-                Producent produktu
-            </TextBox>
-            <Button x:Name="Usuwanie" Margin="0 20" Background="BurlyWood" Click="Usuwanie_Click"  Cursor="Hand">
-                Usuń na zawsze
-            </Button>
-        </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="Montserrat"
+                        FontSize="10"
+                        Foreground="DarkGray"
+                        Text="LISTA ZAKUPÓW" />
+                    <Button
+                        x:Name="Zmniejszanie"
+                        Grid.Column="1"
+                        BorderThickness="0"
+                        Click="Zmniejszanie_Click"
+                        Content="-"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        Foreground="White">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#28AEED" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#278BEF" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="18"
+                                    Height="18"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="9">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button
+                        x:Name="Zamykanie"
+                        Grid.Column="2"
+                        BorderThickness="0"
+                        Click="Zamykanie_Click"
+                        Content="X"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        Foreground="White">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#DA34AE" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#C62DAE" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="18"
+                                    Height="18"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="9">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <!-- Drugi wiersz -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <!-- Pierwsza kolumna zajmuje połowę szerokości -->
+                        <ColumnDefinition Width="240" />
+                        
+                    </Grid.ColumnDefinitions>
 
-    </Grid>
+                    <StackPanel Grid.Column="0" 
+                                Orientation="Horizontal">
+                        <Label Margin="10,0,0,0"  Width="180" Height="25" VerticalAlignment="Top" Foreground="White" Background="#C62DAE">
+                            Nazwa Produktu
+
+                        </Label>
+                        <Label Width="160" Height="25" VerticalAlignment="Top" Foreground="White" Background="#C62DAE">
+                            Producent
+                        </Label>
+                        
+                        
+
+                    </StackPanel>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Horizontal">
+                            <ListBox x:Name="Wyswietlanie_nazwy" Margin="10,25,0,0" Height="380" Width="180"/>
+                            <ListBox x:Name="Wyswietlanie_producenta" Margin="0,25,0,0" Height="380" Width="160"/>
+                        </StackPanel>
+                    </ScrollViewer>
+
+
+
+
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock
+HorizontalAlignment="Center"
+FontFamily="Montserrat"
+FontSize="16"
+FontWeight="Medium"
+Foreground="White"
+Text="Usuń produkty z bazy" 
+Margin="0,20,0,0"/>
+
+                        <Label HorizontalAlignment="Center"
+                               FontFamily="Montserrat"
+                                FontSize="12"
+                               Foreground="White"
+                               >
+                            Podaj nazwę i producenta produktu:
+                        </Label>
+                        <TextBox x:Name="Nazwa_Produktu_usuwanie"
+                                 Margin="0,16,0,16"
+                                 Width="180"
+                                 Height="25"
+                                 Background="#28AEED"
+                                 Foreground="white"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 Text="Nazwa Produktu"
+                                 />
+
+                        <TextBox x:Name="Producent_produktu_usuwanie"
+                                 Margin="0,16,0,16"
+                                 Width="180"
+                                 Height="25"
+                                 Background="#28AEED"
+Foreground="white"
+VerticalContentAlignment="Center"
+HorizontalContentAlignment="Center"
+Text="Producent produktu"/>
+
+                        <Button
+x:Name="Usuwanie"
+Grid.Row="1"
+Grid.Column="0"
+Margin="0,30,0,0"
+BorderThickness="0"
+Click="Usuwanie_Click"
+Content="Usuń na zawsze"
+Cursor="Hand"
+FontFamily="Montserrat"
+FontSize="13"
+Foreground="White">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#DA34AE" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#C62DAE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+             Width="150"
+             Height="35"
+             Background="{TemplateBinding Background}"
+             CornerRadius="9">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+       
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

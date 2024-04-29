@@ -26,37 +26,33 @@ namespace WpfApp1
             InitializeComponent();
             List<string> nazwyProduktow = PobierzNazwyProduktow();
             Wyswietlanie_nazwy.ItemsSource = nazwyProduktow;
+            Wyswietlanie_nazwy.SelectionChanged += Wyswietlanie_nazwy_SelectionChanged;
             List<string> nazwyProducenta = PobierzNazwyProducentow();
             Wyswietlanie_producenta.ItemsSource = nazwyProducenta;
-            List<decimal> ceny = PobierzCeny();
-            Wyswietlanie_ceny.ItemsSource = ceny;
+            Wyswietlanie_producenta.SelectionChanged += Wyswietlanie_nazwy_producenta_SelectionChanged;
+            // Przypisanie zdarzeń ScrollChanged
+            Wyswietlanie_nazwy.ScrollChanged += Wyswietlanie_nazwy_ScrollChanged;
+            Wyswietlanie_producenta.ScrollChanged += Wyswietlanie_producenta_ScrollChanged;
         }
 
-        private List<decimal> PobierzCeny()
+
+        private void Wyswietlanie_nazwy_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            List<decimal> ceny = new List<decimal>();
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (e.VerticalChange != 0)
             {
-                string query = "SELECT Price FROM List";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            decimal cena = reader.GetDecimal(0);
-                            cena = Math.Round(cena, 2); // Zaokrąglenie do dwóch miejsc po przecinku
-                            ceny.Add(cena);
-                        }
-                    }
-                }
+                // Ustaw pozycję przewijania dla drugiego ListBoxa
+                Wyswietlanie_producenta.ScrollToVerticalOffset(e.VerticalOffset);
             }
-
-            return ceny;
         }
 
+        private void Wyswietlanie_producenta_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (e.VerticalChange != 0)
+            {
+                // Ustaw pozycję przewijania dla pierwszego ListBoxa
+                Wyswietlanie_nazwy.ScrollToVerticalOffset(e.VerticalOffset);
+            }
+        }
 
 
         private List<string> PobierzNazwyProducentow()
@@ -144,33 +140,75 @@ namespace WpfApp1
                 }
             }
 
-            private void UsunProdukt(string nazwaProduktu, string producentProduktu)
+        private void UsunProdukt(string nazwaProduktu, string producentProduktu)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                string query = "DELETE FROM List WHERE ProductName = @nazwa AND Producer = @producent";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    string query = "DELETE FROM List WHERE ProductName = @nazwa AND Producer = @producent";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    command.Parameters.AddWithValue("@nazwa", nazwaProduktu);
+                    command.Parameters.AddWithValue("@producent", producentProduktu);
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
                     {
-                        command.Parameters.AddWithValue("@nazwa", nazwaProduktu);
-                        command.Parameters.AddWithValue("@producent", producentProduktu);
-                        connection.Open();
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Produkt został pomyślnie usunięty z bazy danych.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Wystąpił problem podczas usuwania produktu z bazy danych.");
-                        }
+                        MessageBox.Show("Produkt został pomyślnie usunięty z bazy danych.");
+
+                        // Po usunięciu produktu, ponownie pobierz listę produktów i zaktualizuj listboxy
+                        List<string> nazwyProduktow = PobierzNazwyProduktow();
+                        Wyswietlanie_nazwy.ItemsSource = nazwyProduktow;
+
+                        List<string> nazwyProducenta = PobierzNazwyProducentow();
+                        Wyswietlanie_producenta.ItemsSource = nazwyProducenta;
+
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wystąpił problem podczas usuwania produktu z bazy danych.");
                     }
                 }
             }
+        }
 
 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
 
+        }
 
+        private void Zmniejszanie_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
 
-        
+        private void Zamykanie_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = Window.GetWindow((Button)sender);
+
+            // Zamknij tylko to okno
+            window.Close();
+        }
+
+        private void Wyswietlanie_nazwy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Wyswietlanie_nazwy.SelectedItem != null)
+            {
+                string selectedProductName = Wyswietlanie_nazwy.SelectedItem.ToString();
+                Nazwa_Produktu_usuwanie.Text = selectedProductName;
+            }
+        }
+        private void Wyswietlanie_nazwy_producenta_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Wyswietlanie_producenta.SelectedItem != null)
+            {
+                string selectedProducerName = Wyswietlanie_producenta.SelectedItem.ToString();
+                Producent_produktu_usuwanie.Text = selectedProducerName;
+            }
+        }
+
     }
 }

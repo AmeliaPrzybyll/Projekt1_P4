@@ -127,8 +127,8 @@
                     Margin="0,35,0,0"
                     Orientation="Vertical">
                     <Image
-                        Width="125"
-                        Height="125"
+                        Width="140"
+                        Height="140"
                         Source="D:\GitHub\Projekt1_P4\WpfApp1\WpfApp1\Obrazy\02june22_basket_icon_04-removebg-preview.png" />
                     <TextBlock
                         HorizontalAlignment="Center"

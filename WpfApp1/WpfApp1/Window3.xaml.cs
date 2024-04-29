@@ -23,13 +23,16 @@ namespace WpfApp1
 
             // Pobierz wszystkie produkty i zainicjuj listę
             listaProduktow = PobierzWszystkieProdukty();
-
+            listaProduktow.Clear();
             List<string> nazwyProduktow = PobierzNazwyProduktow();
             Wyswietlanie_nazwy_lista.ItemsSource = nazwyProduktow;
+            Wyswietlanie_nazwy_lista.SelectionChanged += Wyswietlanie_nazwy_SelectionChanged;
             List<string> nazwyProducenta = PobierzNazwyProducentow();
             Wyswietlanie_producenta_lista.ItemsSource = nazwyProducenta;
+            Wyswietlanie_producenta_lista.SelectionChanged += Wyswietlanie_nazwy_producenta_SelectionChanged;
             List<decimal> ceny = PobierzCeny();
             Wyswietlanie_ceny_lista.ItemsSource = ceny;
+            Wyswietlanie_ceny_lista.SelectionChanged += Wyswietlanie_ceny_SelectionChanged;
 
             // Wyczyść istniejące elementy ComboBox przed przypisaniem nowego źródła danych
             Kategorie.Items.Clear();
@@ -69,30 +72,7 @@ namespace WpfApp1
             return kategorie;
         }
 
-        private void Kategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Sprawdź, czy wybrano opcję "Wszystkie produkty"
-            if (Kategorie.SelectedItem.ToString() == "Wszystkie produkty")
-            {
-                // Wyświetl wszystkie produkty
-                Wyswietlanie_nazwy_lista.ItemsSource = listaProduktow.Select(p => p.Nazwa);
-                Wyswietlanie_producenta_lista.ItemsSource = listaProduktow.Select(p => p.Producent);
-                Wyswietlanie_ceny_lista.ItemsSource = listaProduktow.Select(p => Math.Round(p.Cena, 2));
-            }
-            else
-            {
-                // Pobierz wybraną kategorię
-                string wybranaKategoria = (Kategorie.SelectedItem as string);
-
-                // Ponownie załaduj dane na wszystkich listach z uwzględnieniem wybranej kategorii
-                List<Produkt> produktyWKategorii = PobierzProduktyWedlugKategorii(wybranaKategoria);
-
-                // Aktualizuj źródło danych dla każdego listboxa
-                Wyswietlanie_nazwy_lista.ItemsSource = produktyWKategorii.Select(p => p.Nazwa);
-                Wyswietlanie_producenta_lista.ItemsSource = produktyWKategorii.Select(p => p.Producent);
-                Wyswietlanie_ceny_lista.ItemsSource = produktyWKategorii.Select(p => Math.Round(p.Cena, 2));
-            }
-        }
+        
 
         private List<Produkt> PobierzProduktyWedlugKategorii(string kategoria)
         {
@@ -236,42 +216,78 @@ namespace WpfApp1
             return produkty;
         }
 
+        private bool SprawdzCzyProduktIstnieje(string nazwaProduktu, string producentProduktu, decimal cenaProduktu)
+        {
+            bool produktIstnieje = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM List WHERE ProductName = @nazwa AND Producer = @producent AND Price=@cena";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@nazwa", nazwaProduktu);
+                    command.Parameters.AddWithValue("@producent", producentProduktu);
+                    command.Parameters.AddWithValue("@cena", cenaProduktu);
+
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    produktIstnieje = count > 0;
+                }
+            }
+            return produktIstnieje;
+        }
+
         private void Dodawanie_Do_listy_Click(object sender, RoutedEventArgs e)
         {
             // Pobranie danych wprowadzonych przez użytkownika
             string nazwaProduktu = Nazwa_Produktu_lista.Text;
             string producentProduktu = Producent_produktu_lista.Text;
-
-            // Sprawdzenie, czy podany produkt istnieje w bazie danych
-            if (SprawdzCzyProduktIstnieje(nazwaProduktu, producentProduktu))
+            decimal cenaProduktu;
+            if (decimal.TryParse(Cena_produktu_lista.Text, out cenaProduktu))
             {
-                // Dodanie nowego produktu do listy
-                listaProduktow.Add(new Produkt { Nazwa = nazwaProduktu, Producent = producentProduktu });
+                // Sprawdzenie, czy podany produkt istnieje w bazie danych
+                if (!SprawdzCzyProduktIstnieje(nazwaProduktu, producentProduktu, cenaProduktu))
+                {
+                    MessageBox.Show("Podany produkt nie istnieje w bazie danych!");
+                }
+                else
+                {
+                    // Dodanie nowego produktu do listy
+                    listaProduktow.Add(new Produkt { Nazwa = nazwaProduktu, Producent = producentProduktu, Cena = cenaProduktu });
 
-                // Wyczyszczenie TextBoxów po dodaniu produktu
-                Nazwa_Produktu_lista.Text = "";
-                Producent_produktu_lista.Text = "";
+                    // Wyczyszczenie TextBoxów po dodaniu produktu
+                    Nazwa_Produktu_lista.Text = "";
+                    Producent_produktu_lista.Text = "";
+                    Cena_produktu_lista.Text = "";
+                }
             }
             else
             {
-                MessageBox.Show("Podany produkt nie istnieje w bazie danych!");
+                MessageBox.Show("Nieprawidłowa cena produktu!");
             }
         }
 
-        private bool SprawdzCzyProduktIstnieje(string nazwaProduktu, string producentProduktu)
+        private void Kategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Sprawdź, czy wybrano opcję "Wszystkie produkty"
+            if (Kategorie.SelectedItem != null && Kategorie.SelectedItem.ToString() == "Wszystkie produkty")
             {
-                string query = "SELECT COUNT(*) FROM List WHERE ProductName = @nazwa AND Producer = @producent";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@nazwa", nazwaProduktu);
-                    command.Parameters.AddWithValue("@producent", producentProduktu);
+                // Wyświetl wszystkie produkty
+                Wyswietlanie_nazwy_lista.ItemsSource = listaProduktow.Select(p => p.Nazwa);
+                Wyswietlanie_producenta_lista.ItemsSource = listaProduktow.Select(p => p.Producent);
+                Wyswietlanie_ceny_lista.ItemsSource = listaProduktow.Select(p => Math.Round(p.Cena, 2));
+            }
+            else if (Kategorie.SelectedItem != null)
+            {
+                // Pobierz wybraną kategorię
+                string wybranaKategoria = (Kategorie.SelectedItem as string);
 
-                    connection.Open();
-                    int count = (int)command.ExecuteScalar();
-                    return count > 0;
-                }
+                // Ponownie załaduj dane na wszystkich listach z uwzględnieniem wybranej kategorii
+                List<Produkt> produktyWKategorii = PobierzProduktyWedlugKategorii(wybranaKategoria);
+
+                // Aktualizuj źródło danych dla każdego listboxa
+                Wyswietlanie_nazwy_lista.ItemsSource = produktyWKategorii.Select(p => p.Nazwa);
+                Wyswietlanie_producenta_lista.ItemsSource = produktyWKategorii.Select(p => p.Producent);
+                Wyswietlanie_ceny_lista.ItemsSource = produktyWKategorii.Select(p => Math.Round(p.Cena, 2));
             }
         }
 
@@ -281,11 +297,22 @@ namespace WpfApp1
             string lista = "Lista produktów:\n";
             foreach (Produkt produkt in listaProduktow)
             {
-                lista += $"{produkt.Nazwa} - {produkt.Producent}\n";
+                lista += $"{produkt.Nazwa} - {produkt.Producent} - {produkt.Cena}\n";
             }
             MessageBox.Show(lista);
         }
-
+        private void Usuwanie_listy_click(object sender, RoutedEventArgs e)
+        {
+            listaProduktow.Clear();
+            if (listaProduktow.Count == 0)
+            {
+                MessageBox.Show("Lista została usunięta!");
+            }
+            else
+            {
+                MessageBox.Show("Nie udało się usunąć listy :(");
+            }
+        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Wyczyszczenie listy przed zamknięciem aplikacji
@@ -304,11 +331,11 @@ namespace WpfApp1
                     // Zapis zawartości listy do pliku
                     foreach (Produkt produkt in listaProduktow)
                     {
-                        writer.WriteLine($"Nazwa: {produkt.Nazwa}, Producent: {produkt.Producent}");
+                        writer.WriteLine($"Nazwa: {produkt.Nazwa}, Producent: {produkt.Producent}, Cena: {produkt.Cena}");
                     }
                 }
 
-                MessageBox.Show("Zapisano zawartość listy do pliku lista_produktow.txt na pulpicie użytkownika Ameli.");
+                MessageBox.Show("Zapisano zawartość listy do pliku lista_produktow.txt na pulpicie użytkownika Amelia.");
             }
             catch (Exception ex)
             {
@@ -316,6 +343,30 @@ namespace WpfApp1
             }
         }
 
+        private void Wyswietlanie_nazwy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Wyswietlanie_nazwy_lista.SelectedItem != null)
+            {
+                string selectedProductName = Wyswietlanie_nazwy_lista.SelectedItem.ToString();
+                Nazwa_Produktu_lista.Text = selectedProductName;
+            }
+        }
+        private void Wyswietlanie_nazwy_producenta_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Wyswietlanie_producenta_lista.SelectedItem != null)
+            {
+                string selectedProducerName = Wyswietlanie_producenta_lista.SelectedItem.ToString();
+                Producent_produktu_lista.Text = selectedProducerName;
+            }
+        }
+        private void Wyswietlanie_ceny_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Wyswietlanie_ceny_lista.SelectedItem != null)
+            {
+                string selectedProducerName = Wyswietlanie_ceny_lista.SelectedItem.ToString();
+                Cena_produktu_lista.Text = selectedProducerName;
+            }
+        }
         public class Produkt
         {
             public string Nazwa { get; set; }

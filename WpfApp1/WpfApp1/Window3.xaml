@@ -73,6 +73,9 @@
             <TextBox x:Name="Producent_produktu_lista">
                 Producent produktu
             </TextBox>
+            <TextBox x:Name="Cena_produktu_lista">
+                Cena produktu
+            </TextBox>
             <Button
                 x:Name="dodawanie_do_listy"
                 Margin="0,20"
@@ -88,6 +91,14 @@
                 Click="Podglad_listy_Click"
                 Cursor="Hand">
                 Zobacz swoją listę
+            </Button>
+            <Button
+    x:Name="usuwanie_listy"
+    Margin="0,20"
+    Background="BurlyWood"
+    Click="Usuwanie_listy_click"
+    Cursor="Hand">
+                Usuń swoją liste
             </Button>
             <Button
                 x:Name="zgranie"
