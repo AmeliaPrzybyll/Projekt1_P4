@@ -142,14 +142,18 @@
                         
 
                     </StackPanel>
-
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel Orientation="Horizontal">
-                            <ListBox x:Name="Wyswietlanie_nazwy" Margin="10,25,0,0" Height="380" Width="180"/>
-                            <ListBox x:Name="Wyswietlanie_producenta" Margin="0,25,0,0" Height="380" Width="160"/>
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0 30 0 0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"  Height="380" Width="180">
+                        <Grid>
+                            <ListBox x:Name="Wyswietlanie_nazwy" Margin="10,0,0,0" Height="380"/>
+                        </Grid>
                     </ScrollViewer>
-
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"  Height="380" Width="160">
+                        <Grid>
+                            <ListBox x:Name="Wyswietlanie_producenta" Margin="0,0,0,0" Height="380"/>
+                        </Grid>
+                    </ScrollViewer>
+                    </StackPanel>
 
 
 

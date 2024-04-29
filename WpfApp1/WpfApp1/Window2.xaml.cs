@@ -31,28 +31,12 @@ namespace WpfApp1
             Wyswietlanie_producenta.ItemsSource = nazwyProducenta;
             Wyswietlanie_producenta.SelectionChanged += Wyswietlanie_nazwy_producenta_SelectionChanged;
             // Przypisanie zdarzeń ScrollChanged
-            Wyswietlanie_nazwy.ScrollChanged += Wyswietlanie_nazwy_ScrollChanged;
-            Wyswietlanie_producenta.ScrollChanged += Wyswietlanie_producenta_ScrollChanged;
+           // Wyswietlanie_nazwy.ScrollChanged += Wyswietlanie_nazwy_ScrollChanged;
+           // Wyswietlanie_producenta.ScrollChanged += Wyswietlanie_producenta_ScrollChanged;
         }
 
+       
 
-        private void Wyswietlanie_nazwy_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            if (e.VerticalChange != 0)
-            {
-                // Ustaw pozycję przewijania dla drugiego ListBoxa
-                Wyswietlanie_producenta.ScrollToVerticalOffset(e.VerticalOffset);
-            }
-        }
-
-        private void Wyswietlanie_producenta_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            if (e.VerticalChange != 0)
-            {
-                // Ustaw pozycję przewijania dla pierwszego ListBoxa
-                Wyswietlanie_nazwy.ScrollToVerticalOffset(e.VerticalOffset);
-            }
-        }
 
 
         private List<string> PobierzNazwyProducentow()
@@ -102,8 +86,8 @@ namespace WpfApp1
             return nazwyProduktow;
         }
 
-        private string nazwa;
-        private string producent;
+        
+      
         private void Usuwanie_Click(object sender, RoutedEventArgs e)
         {
             

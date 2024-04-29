@@ -17,26 +17,13 @@
             VerticalAlignment="Top"
             Orientation="Horizontal">
             <Label
-                Width="150"
+                Width="400"
                 HorizontalAlignment="Center"
                 Background="Chocolate"
                 Foreground="White">
                 Nazwa Produktu
             </Label>
-            <Label
-                Width="150"
-                HorizontalAlignment="Center"
-                Background="Chocolate"
-                Foreground="White">
-                Producent
-            </Label>
-            <Label
-                Width="90"
-                HorizontalAlignment="Center"
-                Background="Chocolate"
-                Foreground="White">
-                Cena
-            </Label>
+           
         </StackPanel>
         <StackPanel
             Grid.ColumnSpan="3"
@@ -44,18 +31,14 @@
             Height="450"
             HorizontalAlignment="Left"
             Orientation="Horizontal">
-            <ListBox
-                x:Name="Wyswietlanie_nazwy_lista"
-                Width="150"
-                Height="380" />
-            <ListBox
-                x:Name="Wyswietlanie_producenta_lista"
-                Width="150"
-                Height="380" />
-            <ListBox
-                x:Name="Wyswietlanie_ceny_lista"
-                Width="90"
-                Height="380" />
+            <ListBox x:Name="Wyswietlanie_nazwy_lista" Width="390" Height="380">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
         </StackPanel>
         <StackPanel
             Width="200"
@@ -65,17 +48,12 @@
                 Stwórz liste zakupów
             </Label>
             <Label HorizontalAlignment="Center">
-                Podaj nazwę i producenta produktu:
+                Podaj nazwę produktu:
             </Label>
             <TextBox x:Name="Nazwa_Produktu_lista">
                 Nazwa Produktu
             </TextBox>
-            <TextBox x:Name="Producent_produktu_lista">
-                Producent produktu
-            </TextBox>
-            <TextBox x:Name="Cena_produktu_lista">
-                Cena produktu
-            </TextBox>
+            
             <Button
                 x:Name="dodawanie_do_listy"
                 Margin="0,20"
