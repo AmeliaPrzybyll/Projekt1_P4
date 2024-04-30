@@ -30,12 +30,7 @@ namespace WpfApp1
         public Window1()
         {
             InitializeComponent();
-            
-
-            // Pobierz wszystkie kategorie z bazy danych
             List<string> kategorieZBazy = PobierzKategorie();
-
-            // Usuń duplikaty z listy kategorii
             List<string> unikalneKategorie = kategorieZBazy.Distinct().ToList();
             unikalneKategorie.Insert(0, "Wszystkie produkty");
 
@@ -67,40 +62,32 @@ namespace WpfApp1
       
         private void Potwierdzenie_dodania_Click(object sender, RoutedEventArgs e)
         {
-            // Odczytanie wartości z TextBox-ów
-            nazwa = Nazwa_Produktu.Text;
+            nazwa = Nazwa_Produktu.Text;//odczytywanie z textboxów
             producent = Producent_produktu.Text;
             kategoria = Kategoria_produktu.Text;
 
-            // Sprawdzenie czy udało się odczytać wartość dla ceny jako float
             if (float.TryParse(Cena_produktu.Text, out cena))
             {
-                // Zapis danych do bazy danych
+           
                 try
                 {
-                    // Połączenie z bazą danych
+         
                     string connectionString = "data source=Amelia\\SQLEXPRESS;initial catalog=ShoppingList;trusted_connection=true";
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        // Zapytanie SQL do wstawienia danych
+                 
                         string query = "INSERT INTO List  VALUES (@Nazwa, @Producent, @Cena, @Kategoria)";
 
-                        // Przygotowanie komendy SQL
+                   
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
-                            // Dodanie parametrów
+
                             command.Parameters.AddWithValue("@Nazwa", nazwa);
                             command.Parameters.AddWithValue("@Producent", producent);
                             command.Parameters.AddWithValue("@Cena", cena);
                             command.Parameters.AddWithValue("@Kategoria",kategoria);
-
-                            // Otwarcie połączenia
                             connection.Open();
-
-                            // Wykonanie zapytania
                             int rowsAffected = command.ExecuteNonQuery();
-
-                            // Sprawdzenie czy dane zostały zapisane poprawnie
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("Dane zostały zapisane poprawnie!");
@@ -119,7 +106,6 @@ namespace WpfApp1
             }
             else
             {
-                // Jeśli nie udało się odczytać wartości jako float, wyświetl komunikat o błędzie
                 MessageBox.Show("Wprowadź poprawną wartość dla ceny produktu!");
             }
         }
@@ -136,12 +122,9 @@ namespace WpfApp1
 
         private void Zamykanie_Click1(object sender, RoutedEventArgs e)
         {
-            // Uzyskaj dostęp do okna, które zawiera przycisk
-            Window window = Window.GetWindow((Button)sender);
-
-            // Zamknij tylko to okno
+            Window window = Window.GetWindow((Button)sender); // żeby zamykało tylko to okno
             window.Close();
-            //Application.Current.Shutdown();
+
         }
     }
 }

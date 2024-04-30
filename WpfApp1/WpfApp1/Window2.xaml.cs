@@ -30,14 +30,7 @@ namespace WpfApp1
             List<string> nazwyProducenta = PobierzNazwyProducentow();
             Wyswietlanie_producenta.ItemsSource = nazwyProducenta;
             Wyswietlanie_producenta.SelectionChanged += Wyswietlanie_nazwy_producenta_SelectionChanged;
-            // Przypisanie zdarzeń ScrollChanged
-           // Wyswietlanie_nazwy.ScrollChanged += Wyswietlanie_nazwy_ScrollChanged;
-           // Wyswietlanie_producenta.ScrollChanged += Wyswietlanie_producenta_ScrollChanged;
         }
-
-       
-
-
 
         private List<string> PobierzNazwyProducentow()
         {
@@ -90,20 +83,15 @@ namespace WpfApp1
       
         private void Usuwanie_Click(object sender, RoutedEventArgs e)
         {
-            
-                // Pobranie nazwy
                 string nazwaProduktu = Nazwa_Produktu_usuwanie.Text;
                 string producentProduktu = Producent_produktu_usuwanie.Text;
 
-                // Sprawdzenie, czy produkt istnieje w bazie danych
                 if (CzyProduktIstnieje(nazwaProduktu, producentProduktu))
                 {
-                    // Produkt istnieje, wykonaj operację usuwania
                     UsunProdukt(nazwaProduktu, producentProduktu);
                 }
                 else
                 {
-                    // Produkt nie istnieje, wyświetl komunikat o błędzie
                     MessageBox.Show("Podany produkt nie istnieje w bazie danych!");
                 }
         }
@@ -119,7 +107,7 @@ namespace WpfApp1
                         command.Parameters.AddWithValue("@producent", producentProduktu);
                         connection.Open();
                         int count = (int)command.ExecuteScalar();
-                        return count > 0; // Zwraca true, jeśli produkt istnieje w bazie danych
+                        return count > 0; 
                     }
                 }
             }
@@ -138,15 +126,10 @@ namespace WpfApp1
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Produkt został pomyślnie usunięty z bazy danych.");
-
-                        // Po usunięciu produktu, ponownie pobierz listę produktów i zaktualizuj listboxy
                         List<string> nazwyProduktow = PobierzNazwyProduktow();
                         Wyswietlanie_nazwy.ItemsSource = nazwyProduktow;
-
                         List<string> nazwyProducenta = PobierzNazwyProducentow();
                         Wyswietlanie_producenta.ItemsSource = nazwyProducenta;
-
-                        
                     }
                     else
                     {
@@ -172,8 +155,6 @@ namespace WpfApp1
         private void Zamykanie_Click(object sender, RoutedEventArgs e)
         {
             Window window = Window.GetWindow((Button)sender);
-
-            // Zamknij tylko to okno
             window.Close();
         }
 

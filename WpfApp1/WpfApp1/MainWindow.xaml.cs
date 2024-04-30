@@ -60,8 +60,6 @@ namespace WpfApp1
         private void Zamykanie_Click(object sender, RoutedEventArgs e)
         {
             Window window = Window.GetWindow((Button)sender);
-
-            // Zamknij tylko to okno
             window.Close();
         }
     }

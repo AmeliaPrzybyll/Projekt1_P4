@@ -1,10 +1,12 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WpfApp1
 {
@@ -21,7 +23,7 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            
+            // Pobierz wszystkie produkty i zainicjuj listę
             listaProduktow = PobierzWszystkieProdukty();
             listaProduktow.Clear();
             List<string> nazwyProduktow = PobierzNazwyProduktow();
@@ -30,7 +32,7 @@ namespace WpfApp1
             List<string> nazwyProducenta = PobierzNazwyProducentow();
 
             List<decimal> ceny = PobierzCeny();
-            
+
 
             // Wyczyść istniejące elementy ComboBox przed przypisaniem nowego źródła danych
             Kategorie.Items.Clear();
@@ -77,7 +79,6 @@ namespace WpfApp1
             {
                 // Wyświetl wszystkie produkty
                 Wyswietlanie_nazwy_lista.ItemsSource = listaProduktow.Select(p => p.Nazwa);
-                
             }
             else
             {
@@ -89,7 +90,7 @@ namespace WpfApp1
 
                 // Aktualizuj źródło danych dla każdego listboxa
                 Wyswietlanie_nazwy_lista.ItemsSource = produktyWKategorii.Select(p => p.Nazwa);
-               
+
             }
         }
 
@@ -122,9 +123,8 @@ namespace WpfApp1
                         while (reader.Read())
                         {
                             string nazwaProduktu = reader.GetString(0);
-                            
-                           
-                            produkty.Add(new Produkt { Nazwa = nazwaProduktu});
+
+                            produkty.Add(new Produkt { Nazwa = nazwaProduktu });
                         }
                     }
                 }
@@ -223,7 +223,7 @@ namespace WpfApp1
                         while (reader.Read())
                         {
                             string nazwaProduktu = reader.GetString(0);
-                            
+
                             produkty.Add(new Produkt { Nazwa = nazwaProduktu });
                         }
                     }
@@ -236,10 +236,10 @@ namespace WpfApp1
         private void Usuwanie_listy_click(object sender, RoutedEventArgs e)
         {
             listaProduktow.Clear(); // Usuń wszystkie elementy z listy
-            
+
             MessageBox.Show("Lista została usunięta!");
         }
-       
+
 
         private void Dodawanie_Do_listy_Click(object sender, RoutedEventArgs e)
         {
@@ -295,7 +295,7 @@ namespace WpfApp1
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@nazwa", nazwaProduktu);
-                    
+
 
                     connection.Open();
                     int count = (int)command.ExecuteScalar();
@@ -303,7 +303,7 @@ namespace WpfApp1
                 }
             }
         }
-        
+      
         private void Podglad_listy_Click(object sender, RoutedEventArgs e)
         {
             // Wyświetlenie zawartości listy
@@ -361,7 +361,24 @@ namespace WpfApp1
                 Nazwa_Produktu_lista.Text = selectedProductName;
             }
         }
-       
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+
+        }
+
+        private void Zmniejszanie_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Zamykanie_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = Window.GetWindow((Button)sender);
+            window.Close();
+        }
         public class Produkt
         {
             public string Nazwa { get; set; }

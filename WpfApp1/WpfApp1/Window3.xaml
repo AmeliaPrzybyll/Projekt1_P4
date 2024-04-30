@@ -1,94 +1,286 @@
-﻿<Window
-    x:Class="WpfApp1.Window3"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WpfApp1"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Window3"
-    Width="600"
-    Height="450"
-    mc:Ignorable="d">
-    <Grid>
-        <StackPanel
-            Width="390"
-            Height="30"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Orientation="Horizontal">
-            <Label
-                Width="400"
-                HorizontalAlignment="Center"
-                Background="Chocolate"
-                Foreground="White">
-                Nazwa Produktu
-            </Label>
-           
-        </StackPanel>
-        <StackPanel
-            Grid.ColumnSpan="3"
-            Width="400"
-            Height="450"
-            HorizontalAlignment="Left"
-            Orientation="Horizontal">
-            <ListBox x:Name="Wyswietlanie_nazwy_lista" Width="390" Height="380">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+﻿<Window x:Class="WpfApp1.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Window3"
+        Width="600"
+        Height="550"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseDown="Window_MouseDown"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+    <Border CornerRadius="50">
+        <Border BorderThickness="2" CornerRadius="50" Opacity="0.95">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#462AD8" />
+                    <GradientStop Offset="0.75" Color="#DA34AE" />
+                    <GradientStop Offset="1" Color="#8A16C1" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,8">
+                    <GradientStop Offset="0" Color="#060531" />
+                    <GradientStop Offset="0.75" Color="#1B1448" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        </StackPanel>
-        <StackPanel
-            Width="200"
-            Height="450"
-            HorizontalAlignment="Right">
-            <Label HorizontalAlignment="Center" FontWeight="Bold">
-                Stwórz liste zakupów
-            </Label>
-            <Label HorizontalAlignment="Center">
-                Podaj nazwę produktu:
-            </Label>
-            <TextBox x:Name="Nazwa_Produktu_lista">
-                Nazwa Produktu
-            </TextBox>
-            
-            <Button
-                x:Name="dodawanie_do_listy"
-                Margin="0,20"
-                Background="BurlyWood"
-                Click="Dodawanie_Do_listy_Click"
-                Cursor="Hand">
-                Dodaj
-            </Button>
-            <Button
-                x:Name="podglad_listy"
-                Margin="0,20"
-                Background="BurlyWood"
-                Click="Podglad_listy_Click"
-                Cursor="Hand">
-                Zobacz swoją listę
-            </Button>
-            <Button
-    x:Name="usuwanie_listy"
-    Margin="0,20"
-    Background="BurlyWood"
-    Click="Usuwanie_listy_click"
-    Cursor="Hand">
-                Usuń swoją liste
-            </Button>
-            <Button
-                x:Name="zgranie"
-                Margin="0,20"
-                Background="BurlyWood"
-                Click="Zgranie_Click"
-                Cursor="Hand">
-                Zgraj liste do pliku
-            </Button>
-            <ComboBox x:Name="Kategorie" SelectionChanged="Kategorie_SelectionChanged">
-                <TextBlock Text="{Binding Name}" />
-            </ComboBox>
-        </StackPanel>
-    </Grid>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="20" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Margin="30,0,0,0" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="10" Foreground="DarkGray" Text="LISTA ZAKUPÓW" />
+                    <Button x:Name="Zmniejszanie" Grid.Column="1" BorderThickness="0" Click="Zmniejszanie_Click" Content="-" Cursor="Hand" FontFamily="Montserrat" FontSize="16" Foreground="White">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#28AEED" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#278BEF" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18" Background="{TemplateBinding Background}" CornerRadius="9">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="Zamykanie" Grid.Column="2" BorderThickness="0" Click="Zamykanie_Click" Content="X" Cursor="Hand" FontFamily="Montserrat" FontSize="12" Foreground="White">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#DA34AE" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#C62DAE" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18" Background="{TemplateBinding Background}" CornerRadius="9">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel Width="390" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+                        <Label Margin="10,0,0,0"  Width="400" Height="25" VerticalAlignment="Top" Foreground="White" Background="#C62DAE">
+                            Nazwa Produktu
+
+                        </Label>
+                        
+                    </StackPanel>
+                    <StackPanel Grid.ColumnSpan="3" Width="400" Height="450" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <ListBox x:Name="Wyswietlanie_nazwy_lista" Width="390" Height="380" 
+                                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    <StackPanel Width="200" Height="450" HorizontalAlignment="Right">
+                        <TextBlock
+HorizontalAlignment="Center"
+FontFamily="Montserrat"
+FontSize="16"
+FontWeight="Medium"
+Foreground="White"
+Text="Stwórz liste zakupów" 
+Margin="0,20,0,0"/>
+                        <Label HorizontalAlignment="Center"
+       FontFamily="Montserrat"
+        FontSize="12"
+       Foreground="White"
+       >
+                            Podaj nazwę produktu:
+                        </Label>
+                     
+                        
+                        <TextBox x:Name="Nazwa_Produktu_lista"
+         Margin="0,16,0,16"
+         Width="180"
+         Height="25"
+         Background="#28AEED"
+         Foreground="white"
+         VerticalContentAlignment="Center"
+         HorizontalContentAlignment="Center"
+         Text="Nazwa Produktu"
+         />
+                        <Button
+x:Name="dodawanie_do_listy"
+Grid.Row="1"
+Grid.Column="0"
+Margin="0,10,0,0"
+BorderThickness="0"
+Click="Dodawanie_Do_listy_Click"
+Content="Dodaj"
+Cursor="Hand"
+FontFamily="Montserrat"
+FontSize="13"
+Foreground="White">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#DA34AE" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#C62DAE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+             Width="150"
+             Height="35"
+             Background="{TemplateBinding Background}"
+             CornerRadius="9">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button
+x:Name="podglad_listy"
+Grid.Row="1"
+Grid.Column="0"
+Margin="0,10,0,0"
+BorderThickness="0"
+Click="Podglad_listy_Click"
+Content="Zobacz swoją listę"
+Cursor="Hand"
+FontFamily="Montserrat"
+FontSize="13"
+Foreground="White">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#DA34AE" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#C62DAE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+             Width="150"
+             Height="35"
+             Background="{TemplateBinding Background}"
+             CornerRadius="9">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+
+
+                        <Button
+x:Name="usuwanie_listy"
+Grid.Row="1"
+Grid.Column="0"
+Margin="0,10,0,0"
+BorderThickness="0"
+Click="Usuwanie_listy_click"
+Content="Usuń swoją liste"
+Cursor="Hand"
+FontFamily="Montserrat"
+FontSize="13"
+Foreground="White">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#DA34AE" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#C62DAE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+             Width="150"
+             Height="35"
+             Background="{TemplateBinding Background}"
+             CornerRadius="9">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+
+                        <Button
+x:Name="zgranie"
+Grid.Row="1"
+Grid.Column="0"
+Margin="0,10,0,0"
+BorderThickness="0"
+Click="Zgranie_Click"
+Content="Zgraj liste do pliku"
+Cursor="Hand"
+FontFamily="Montserrat"
+FontSize="13"
+Foreground="White">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#DA34AE" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#C62DAE" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+             Width="150"
+             Height="35"
+             Background="{TemplateBinding Background}"
+             CornerRadius="9">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <ComboBox x:Name="Kategorie" Margin="0,10,0,0" SelectionChanged="Kategorie_SelectionChanged"
+          Width="180" Height="25" VerticalAlignment="Top"  Background="#C62DAE">
+                            <TextBlock Text="{Binding Name}" />
+                        </ComboBox>
+                        <Image
+    Width="140"
+    Height="140"
+    Source="D:\GitHub\Projekt1_P4\WpfApp1\WpfApp1\Obrazy\2obraz.png" />
+                        
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
 </Window>
